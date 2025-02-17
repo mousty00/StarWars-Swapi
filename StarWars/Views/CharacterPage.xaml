@@ -1,0 +1,126 @@
+﻿<Page
+    x:Class="StarWars.CharacterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StarWars"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:local1="using:StarWars.Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <ProgressRing x:Name="LoadingRing" IsActive="False" VerticalAlignment="Center" HorizontalAlignment="Center" Height="100" Width="100" />
+
+        <Image Source="../assets/logo.png" Width="60" Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="120 40 0 100"/>
+
+        <!-- Search bar -->
+        <StackPanel Margin="50" HorizontalAlignment="Center" VerticalAlignment="Top" Width="350">
+            <TextBox x:Name="Search" Background="#101010" Foreground="White" Padding="10" BorderThickness="0" TextAlignment="Center" PlaceholderText="Search by Character name or Planet" 
+             TextChanged="Search_TextChanged" CornerRadius="10" FontSize="18" />
+        </StackPanel>
+
+        <!-- Characters list -->
+        <ListView x:Name="PeopleListView" Margin="100 200 100 100">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="10">
+                        
+                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,10,0" />
+                        <TextBlock Text="{Binding name}" FontSize="24" FontWeight="Bold" />
+
+                        <!-- Additional Details -->
+                        <StackPanel x:Name="DetailsPanel" Visibility="Collapsed">
+                            <TextBlock FontSize="20">
+                        <Run Text="Height: " />
+                        <Run Text="{Binding height}" />
+                            </TextBlock>
+                            <TextBlock FontSize="20">
+                        <Run Text="Mass: " />
+                        <Run Text="{Binding mass}" />
+                            </TextBlock>
+                            <TextBlock FontSize="20">
+                        <Run Text="Gender: " />
+                        <Run Text="{Binding gender}" />
+                            </TextBlock>
+                            <TextBlock FontSize="20">
+                        <Run Text="Hair Color: " />
+                        <Run Text="{Binding hair_color}" />
+                            </TextBlock>
+                            <TextBlock FontSize="20">
+                        <Run Text="Skin Color: " />
+                        <Run Text="{Binding skin_color}" />
+                            </TextBlock>
+                            <TextBlock FontSize="20">
+                        <Run Text="Eye Color: " />
+                        <Run Text="{Binding eye_color}" />
+                            </TextBlock>
+                            <TextBlock FontSize="20">
+                        <Run Text="Birth Year: " />
+                        <Run Text="{Binding birth_year}" />
+                            </TextBlock>
+
+                            <!-- Planet Details -->
+                            <StackPanel Margin="0,20,0,0">
+                                <TextBlock FontSize="24" FontWeight="Bold">
+                            <Run Text="Planet: " />
+                            <Run Text="{Binding PlanetInfo.name}" />
+                                </TextBlock>
+                                <TextBlock FontSize="20">
+                            <Run Text="Gravity: " />
+                            <Run Text="{Binding PlanetInfo.gravity, FallbackValue='Unknown'}" />
+                                </TextBlock>
+                                <TextBlock FontSize="20">
+                            <Run Text="Terrain: " />
+                            <Run Text="{Binding PlanetInfo.terrain, FallbackValue='Unknown'}" />
+                                </TextBlock>
+                                <TextBlock FontSize="20">
+                            <Run Text="Surface Water: " />
+                            <Run Text="{Binding PlanetInfo.surface_water, FallbackValue='Unknown'}" />
+                                </TextBlock>
+                                <TextBlock FontSize="20">
+                            <Run Text="Population: " />
+                            <Run Text="{Binding PlanetInfo.population, FallbackValue='Unknown'}" />
+                                </TextBlock>
+                            </StackPanel>
+
+                            <!-- Vehicles -->
+                            <StackPanel Margin="0,10,0,10">
+                                <TextBlock FontSize="20" FontWeight="SemiBold">
+                            <Run Text="Vehicles: " />
+                            <Run Text="{Binding Vehicles}" />
+                                </TextBlock>
+                            </StackPanel>
+
+                            <!-- Starships -->
+                            <StackPanel Margin="0,0,0,10">
+                                <TextBlock FontSize="20" FontWeight="SemiBold">
+                            <Run Text="Starships: " />
+                            <Run Text="{Binding Starships}" />
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- View More Button -->
+                        <Button x:Name="ViewMoreButton" 
+                        Foreground="White" 
+                        Content="View More" 
+                        Background="#151515" 
+                        FontSize="18" 
+                        Margin="0,10" 
+                        BorderThickness="0"
+                        Click="ViewMoreButton_Click" 
+                        CommandParameter="{Binding}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Save and Load buttons -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20">
+            <Button x:Name="ResetButton" Content="RESET" Click="ResetButton_Click" Margin="10" FontSize="20" Background="OrangeRed" />
+            <Button x:Name="LoadButton" Content="LOAD" Click="LoadButton_Click" Margin="10" FontSize="20" Background="OrangeRed" />
+            <Button x:Name="SaveButton" Content="SAVE" Click="SaveButton_Click" Margin="10" FontSize="20" Background="OrangeRed" />
+            
+        </StackPanel>
+    </Grid>
+</Page>
